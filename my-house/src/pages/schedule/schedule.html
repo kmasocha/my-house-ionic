@@ -1,0 +1,71 @@
+<!--
+  Generated template for the SchedulePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+     <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title color="danger"><ion-icon name="alarm"></ion-icon>&nbsp;&nbsp;Schedule</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+<div padding>
+  <ion-segment [(ngModel)]="schedule">
+    <ion-segment-button value="current-schedule">
+      Upcoming Maintanance Schedule
+    </ion-segment-button>
+    <ion-segment-button value="new-schedule">
+      New Schedule
+    </ion-segment-button>
+  </ion-segment>
+</div>
+
+<div [ngSwitch]="schedule">
+  <ion-list *ngSwitchCase="'current-schedule'">
+    <ion-item>
+      <ion-label>Asset 1</ion-label>  
+    </ion-item>
+    <ion-item>
+      <ion-label>Asset 2</ion-label>   
+    </ion-item>
+   <ion-item>
+      <ion-label>Asset 3</ion-label>   
+    </ion-item>
+       <ion-item>
+      <ion-label>Asset 4</ion-label>   
+    </ion-item>
+       <ion-item>
+      <ion-label>Asset 5</ion-label>   
+    </ion-item>
+    </ion-list>
+<ion-list *ngSwitchCase="'new-schedule'">
+    <ion-item>
+      <ion-label floating>Asset Name</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Category</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Year Model</ion-label>
+       <ion-datetime displayFormat="YYYY"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Last Service Date</ion-label>
+       <ion-datetime allowOldDates displayFormat="MMM DD YYYY" ></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Next maintanance period</ion-label>
+        <ion-datetime allowOldDates displayFormat="DDD MMM DD YYYY"  ></ion-datetime>
+    </ion-item>
+  </ion-list>
+
+</div>
+</ion-content>
