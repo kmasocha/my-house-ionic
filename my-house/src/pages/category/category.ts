@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { SQLite, SQLiteObject} from '@ionic-native/sqlite';
 /**
  * Generated class for the CategoryPage page.
@@ -16,12 +15,15 @@ import { SQLite, SQLiteObject} from '@ionic-native/sqlite';
 })
 export class CategoryPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private storage:Storage, private sqlite: SQLite) {
-   // this.createDatabase();
+  constructor(public navCtrl: NavController, public navParams: NavParams,  private sqlite: SQLite, public toastCtrl:ToastController) {
+    this.createDatabase();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CategoryPage');
+  }
+  init(){
+    this.presentToast('my test');
   }
 
 createDatabase(){
@@ -29,11 +31,23 @@ createDatabase(){
 name:'data.db',
 location:'default'
   }).then((db:SQLiteObject)=>{
-    db.executeSql('create table category(name VARCHAR(250))',{})
-    .then(()=>console.log('Execute SQL'))
-    .catch(e=>console.log(e));
+    db.executeSql('create table if not exists category(name VARCHAR(250))',{})
+    .then(()=> this.presentToast('category table created'))
+    .catch(e=>this.presentToast('Error in creating a table'));
   })
-  .catch(e=>console.log(e));
+  .catch(e=>this.presentToast('Erorr in database creation'));
 }
- // this.storage.set('name','Max');
+
+presentToast(_message){
+  let toast=this.toastCtrl.create({
+    message:_message,
+    duration:3000
+  });
+  toast.present();
+}
+
+saveCategory(){
+  
+}
+
 }
